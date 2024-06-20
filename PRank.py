@@ -106,5 +106,5 @@ node_graph = {
     'node20': [('node15', 0.8)]
 }
 
-dense_subgraphs = find_dense_subgraphs(node_graph, similarity_threshold=0.6, num_clusters=3)
+dense_subgraphs = find_dense_subgraphs(node_graph, similarity_threshold=0.8, num_clusters=3)
 print(dense_subgraphs)
