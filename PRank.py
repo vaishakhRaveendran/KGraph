@@ -1,11 +1,38 @@
 import numpy as np
 from collections import defaultdict
 
+import numpy as np
+
 def pagerank(adjacency_matrix, damping_factor=0.85, max_iterations=100, tolerance=1e-8):
     """
     Calculates the PageRank scores for nodes in a graph represented by an adjacency matrix.
+
+    Args:
+        adjacency_matrix (numpy.ndarray): The adjacency matrix of the graph.
+        damping_factor (float, optional): The damping factor used in the PageRank calculation. Defaults to 0.85.
+        max_iterations (int, optional): The maximum number of iterations to perform. Defaults to 100.
+        tolerance (float, optional): The tolerance for convergence. Defaults to 1e-8.
+
+    Returns:
+        numpy.ndarray: The PageRank scores for each node in the graph.
     """
-    # ... (implementation same as the previous example) ...
+    num_nodes = adjacency_matrix.shape[0]
+    pagerank_scores = np.ones(num_nodes) / num_nodes  # Initialize PageRank scores to 1/N
+    
+    for _ in range(max_iterations):
+        prev_pagerank_scores = pagerank_scores.copy()
+        
+        # Calculate the sum of incoming PageRank scores
+        incoming_pagerank_scores = np.dot(adjacency_matrix.T, pagerank_scores)
+        
+        # Calculate the PageRank scores for the next iteration
+        pagerank_scores = (1 - damping_factor) / num_nodes + damping_factor * incoming_pagerank_scores
+        
+        # Check for convergence
+        if np.linalg.norm(pagerank_scores - prev_pagerank_scores, ord=1) < tolerance:
+            break
+    
+    return pagerank_scores
 
 def find_dense_subgraphs(sentence_graph, similarity_threshold=0.5, num_clusters=3):
     """
