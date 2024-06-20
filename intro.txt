@@ -1,0 +1,1 @@
+GraphQL solves the issue of overfetching and underfetching. GraphQL solves this problem by allowing user to customize the single end point.
