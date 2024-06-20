@@ -34,12 +34,12 @@ def pagerank(adjacency_matrix, damping_factor=0.85, max_iterations=100, toleranc
     
     return pagerank_scores
 
-def find_dense_subgraphs(sentence_graph, similarity_threshold=0.5, num_clusters=3):
+def find_dense_subgraphs(node_graph, similarity_threshold=0.5, num_clusters=3):
     """
     Finds dense subgraphs (clusters) in the sentence graph using PageRank.
 
     Args:
-        sentence_graph (dict): A dictionary representing the sentence graph, where keys are sentence IDs,
+        node_graph (dict): A dictionary representing the sentence graph, where keys are sentence IDs,
                                and values are lists of tuples (neighbor_id, similarity_score).
         similarity_threshold (float, optional): The minimum similarity score to consider for PageRank edges. Defaults to 0.5.
         num_clusters (int, optional): The desired number of dense subgraphs (clusters) to return. Defaults to 3.
@@ -47,12 +47,12 @@ def find_dense_subgraphs(sentence_graph, similarity_threshold=0.5, num_clusters=
     Returns:
         list: A list of lists, where each inner list contains the sentence IDs of a dense subgraph (cluster).
     """
-    num_nodes = len(sentence_graph)
+    num_nodes = len(node_graph)
     adjacency_matrix = np.zeros((num_nodes, num_nodes))
 
     # Create the adjacency matrix from the sentence graph
-    node_indices = {node_id: idx for idx, node_id in enumerate(sentence_graph.keys())}
-    for node_id, neighbors in sentence_graph.items():
+    node_indices = {node_id: idx for idx, node_id in enumerate(node_graph.keys())}
+    for node_id, neighbors in node_graph.items():
         node_idx = node_indices[node_id]
         for neighbor_id, similarity in neighbors:
             if similarity >= similarity_threshold:
@@ -83,28 +83,28 @@ def find_dense_subgraphs(sentence_graph, similarity_threshold=0.5, num_clusters=
     return dense_subgraphs
 
 # Example usage
-sentence_graph = {
-    'sent1': [('sent2', 0.8), ('sent3', 0.6), ('sent4', 0.2), ('sent9', 0.7)],
-    'sent2': [('sent1', 0.8), ('sent3', 0.7), ('sent5', 0.4), ('sent10', 0.6)],
-    'sent3': [('sent1', 0.6), ('sent2', 0.7), ('sent6', 0.9), ('sent11', 0.5)],
-    'sent4': [('sent1', 0.2), ('sent5', 0.3), ('sent7', 0.8), ('sent8', 0.6)],
-    'sent5': [('sent2', 0.4), ('sent4', 0.3), ('sent6', 0.5), ('sent8', 0.7)],
-    'sent6': [('sent3', 0.9), ('sent5', 0.5), ('sent11', 0.6), ('sent12', 0.8)],
-    'sent7': [('sent4', 0.8), ('sent8', 0.7), ('sent13', 0.6)],
-    'sent8': [('sent4', 0.6), ('sent5', 0.7), ('sent7', 0.7), ('sent14', 0.5)],
-    'sent9': [('sent1', 0.7), ('sent10', 0.8), ('sent15', 0.6)],
-    'sent10': [('sent2', 0.6), ('sent9', 0.8), ('sent11', 0.7), ('sent16', 0.5)],
-    'sent11': [('sent3', 0.5), ('sent6', 0.6), ('sent10', 0.7), ('sent12', 0.9)],
-    'sent12': [('sent6', 0.8), ('sent11', 0.9), ('sent17', 0.6)],
-    'sent13': [('sent7', 0.6), ('sent14', 0.7), ('sent18', 0.8)],
-    'sent14': [('sent8', 0.5), ('sent13', 0.7), ('sent19', 0.6)],
-    'sent15': [('sent9', 0.6), ('sent16', 0.7), ('sent20', 0.8)],
-    'sent16': [('sent10', 0.5), ('sent15', 0.7)],
-    'sent17': [('sent12', 0.6)],
-    'sent18': [('sent13', 0.8)],
-    'sent19': [('sent14', 0.6)],
-    'sent20': [('sent15', 0.8)]
+node_graph = {
+    'node1': [('node2', 0.8), ('node3', 0.6), ('node4', 0.2), ('node9', 0.7)],
+    'node2': [('node1', 0.8), ('node3', 0.7), ('node5', 0.4), ('node10', 0.6)],
+    'node3': [('node1', 0.6), ('node2', 0.7), ('node6', 0.9), ('node11', 0.5)],
+    'node4': [('node1', 0.2), ('node5', 0.3), ('node7', 0.8), ('node8', 0.6)],
+    'node5': [('node2', 0.4), ('node4', 0.3), ('node6', 0.5), ('node8', 0.7)],
+    'node6': [('node3', 0.9), ('node5', 0.5), ('node11', 0.6), ('node12', 0.8)],
+    'node7': [('node4', 0.8), ('node8', 0.7), ('node13', 0.6)],
+    'node8': [('node4', 0.6), ('node5', 0.7), ('node7', 0.7), ('node14', 0.5)],
+    'node9': [('node1', 0.7), ('node10', 0.8), ('node15', 0.6)],
+    'node10': [('node2', 0.6), ('node9', 0.8), ('node11', 0.7), ('node16', 0.5)],
+    'node11': [('node3', 0.5), ('node6', 0.6), ('node10', 0.7), ('node12', 0.9)],
+    'node12': [('node6', 0.8), ('node11', 0.9), ('node17', 0.6)],
+    'node13': [('node7', 0.6), ('node14', 0.7), ('node18', 0.8)],
+    'node14': [('node8', 0.5), ('node13', 0.7), ('node19', 0.6)],
+    'node15': [('node9', 0.6), ('node16', 0.7), ('node20', 0.8)],
+    'node16': [('node10', 0.5), ('node15', 0.7)],
+    'node17': [('node12', 0.6)],
+    'node18': [('node13', 0.8)],
+    'node19': [('node14', 0.6)],
+    'node20': [('node15', 0.8)]
 }
 
-dense_subgraphs = find_dense_subgraphs(sentence_graph, similarity_threshold=0.6, num_clusters=3)
+dense_subgraphs = find_dense_subgraphs(node_graph, similarity_threshold=0.6, num_clusters=3)
 print(dense_subgraphs)
