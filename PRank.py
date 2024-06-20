@@ -84,12 +84,26 @@ def find_dense_subgraphs(sentence_graph, similarity_threshold=0.5, num_clusters=
 
 # Example usage
 sentence_graph = {
-    'sent1': [('sent2', 0.8), ('sent3', 0.6), ('sent4', 0.2)],
-    'sent2': [('sent1', 0.8), ('sent3', 0.7), ('sent5', 0.4)],
-    'sent3': [('sent1', 0.6), ('sent2', 0.7), ('sent6', 0.9)],
-    'sent4': [('sent1', 0.2), ('sent5', 0.3)],
-    'sent5': [('sent2', 0.4), ('sent4', 0.3), ('sent6', 0.5)],
-    'sent6': [('sent3', 0.9), ('sent5', 0.5)]
+    'sent1': [('sent2', 0.8), ('sent3', 0.6), ('sent4', 0.2), ('sent9', 0.7)],
+    'sent2': [('sent1', 0.8), ('sent3', 0.7), ('sent5', 0.4), ('sent10', 0.6)],
+    'sent3': [('sent1', 0.6), ('sent2', 0.7), ('sent6', 0.9), ('sent11', 0.5)],
+    'sent4': [('sent1', 0.2), ('sent5', 0.3), ('sent7', 0.8), ('sent8', 0.6)],
+    'sent5': [('sent2', 0.4), ('sent4', 0.3), ('sent6', 0.5), ('sent8', 0.7)],
+    'sent6': [('sent3', 0.9), ('sent5', 0.5), ('sent11', 0.6), ('sent12', 0.8)],
+    'sent7': [('sent4', 0.8), ('sent8', 0.7), ('sent13', 0.6)],
+    'sent8': [('sent4', 0.6), ('sent5', 0.7), ('sent7', 0.7), ('sent14', 0.5)],
+    'sent9': [('sent1', 0.7), ('sent10', 0.8), ('sent15', 0.6)],
+    'sent10': [('sent2', 0.6), ('sent9', 0.8), ('sent11', 0.7), ('sent16', 0.5)],
+    'sent11': [('sent3', 0.5), ('sent6', 0.6), ('sent10', 0.7), ('sent12', 0.9)],
+    'sent12': [('sent6', 0.8), ('sent11', 0.9), ('sent17', 0.6)],
+    'sent13': [('sent7', 0.6), ('sent14', 0.7), ('sent18', 0.8)],
+    'sent14': [('sent8', 0.5), ('sent13', 0.7), ('sent19', 0.6)],
+    'sent15': [('sent9', 0.6), ('sent16', 0.7), ('sent20', 0.8)],
+    'sent16': [('sent10', 0.5), ('sent15', 0.7)],
+    'sent17': [('sent12', 0.6)],
+    'sent18': [('sent13', 0.8)],
+    'sent19': [('sent14', 0.6)],
+    'sent20': [('sent15', 0.8)]
 }
 
 dense_subgraphs = find_dense_subgraphs(sentence_graph, similarity_threshold=0.6, num_clusters=3)
