@@ -44,17 +44,29 @@ class QADedupSystem:
 
         return similar_pairs
 
-# Example usage
+# Extended example usage
 if __name__ == "__main__":
     dedup_system = QADedupSystem()
 
     # Add some QA pairs
-    print(dedup_system.add_qa_pair("What is Python?", "Python is a programming language."))  # True
-    print(dedup_system.add_qa_pair("What is Python?", "Python is a programming language."))  # False (duplicate)
-    print(dedup_system.add_qa_pair("How do I install Python?", "You can download Python from python.org."))  # True
+    print(dedup_system.add_qa_pair("What is Python?", "Python is a high-level, interpreted programming language."))  # True
+    print(dedup_system.add_qa_pair("What is Python?", "Python is a high-level, interpreted programming language."))  # False (duplicate)
+    print(dedup_system.add_qa_pair("How do I install Python?", "You can download Python from python.org and follow the installation instructions."))  # True
+    print(dedup_system.add_qa_pair("What are Python's main features?", "Python features include simplicity, readability, and a large standard library."))  # True
+    print(dedup_system.add_qa_pair("Is Python object-oriented?", "Yes, Python supports object-oriented programming paradigms."))  # True
+    print(dedup_system.add_qa_pair("What is a Python list?", "A Python list is a mutable, ordered collection of elements."))  # True
+    print(dedup_system.add_qa_pair("How do I create a virtual environment in Python?", "Use the 'venv' module to create a virtual environment in Python."))  # True
+    print(dedup_system.add_qa_pair("What is PIP in Python?", "PIP is the package installer for Python, used to install and manage additional libraries."))  # True
 
     # Search for similar questions
-    similar = dedup_system.search_similar_questions("Tell me about Python")
+    similar = dedup_system.search_similar_questions("Tell me about Python programming")
+    print("\nSimilar questions for 'Tell me about Python programming':")
+    for question, answer in similar:
+        print(f"Q: {question}\nA: {answer}\n")
+
+    # Another similarity search
+    similar = dedup_system.search_similar_questions("How to set up Python?")
+    print("\nSimilar questions for 'How to set up Python?':")
     for question, answer in similar:
         print(f"Q: {question}\nA: {answer}\n")
 
