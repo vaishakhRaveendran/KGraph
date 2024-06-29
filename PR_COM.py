@@ -57,7 +57,7 @@ class DocumentGraphQuestionGenerator:
         return nx.pagerank(subgraph)
 
     def generate_question(self, context):
-        prompt = f"Generate a thought-provoking question based on the following context:\n\n{context}\n\nQuestion:"
+        prompt = f"Generate tough question for which the following context serve as answer:\n\n{context}\n\nQuestion:"
         self.chat_completion = self.client.chat.completions.create(
             model=self.model,
             messages=[
@@ -113,13 +113,11 @@ class DocumentGraphQuestionGenerator:
 # Example usage
 if __name__ == "__main__":
     chunks = [
-        "The water cycle, also known as the hydrologic cycle, describes the continuous movement of water within the Earth and atmosphere.",
-        "It is a complex system that includes many different processes: evaporation, transpiration, condensation, precipitation, and runoff.",
-        "Climate change is a long-term change in the average weather patterns that have come to define Earth's local, regional, and global climates.",
-        "The primary cause of climate change is human activities, particularly the burning of fossil fuels, which adds heat-trapping greenhouse gases to Earth's atmosphere.",
-        "Renewable energy is energy derived from natural sources that are replenished at a higher rate than they are consumed.",
-        "Sunlight, wind, rain, tides, waves, and geothermal heat are all renewable resources that can be used to produce sustainable energy."
-    ]
+    "The water cycle, also known as the hydrologic cycle, describes the continuous movement of water within the Earth and atmosphere. It is a complex system that includes many different processes: evaporation, transpiration, condensation, precipitation, and runoff. These processes are vital for sustaining life on Earth, regulating climate, and replenishing freshwater resources. However, human activities such as deforestation, urbanization, and climate change can disrupt the natural water cycle, leading to severe consequences like droughts, floods, and water scarcity.",
+    "Climate change is a long-term change in the average weather patterns that have come to define Earth's local, regional, and global climates. The primary cause of climate change is human activities, particularly the burning of fossil fuels, which adds heat-trapping greenhouse gases to Earth's atmosphere. This results in global warming, which in turn leads to melting ice caps, rising sea levels, and extreme weather events. The impact of climate change on ecosystems, agriculture, and human health is profound and necessitates urgent action to mitigate its effects.",
+    "Renewable energy is energy derived from natural sources that are replenished at a higher rate than they are consumed. Sunlight, wind, rain, tides, waves, and geothermal heat are all renewable resources that can be used to produce sustainable energy. Transitioning to renewable energy sources is crucial in reducing greenhouse gas emissions, decreasing reliance on fossil fuels, and combating climate change. Investment in renewable energy technologies, such as solar panels, wind turbines, and hydropower plants, is essential for a sustainable future."
+]
+
 
     generator = DocumentGraphQuestionGenerator()
     intra_questions, inter_questions = generator.process_document(chunks)
