@@ -3,6 +3,7 @@ import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 from openai import OpenAI
 import os
+os.environ['OMP_NUM_THREADS'] = '1'
 from dotenv import load_dotenv
 from groq import Groq
 import scipy as sp
